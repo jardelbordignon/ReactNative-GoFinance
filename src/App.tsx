@@ -1,17 +1,18 @@
-import { Center, NativeBaseProvider, useColorModeValue } from 'native-base'
+import { Center, NativeBaseProvider } from 'native-base'
 import React from 'react'
 
 import { Dashboard } from './screens/Dashboard'
+import { theme } from './styles/theme'
 
 const ThemedContent = () => (
-  <Center flex={1} bg={useColorModeValue('warmGray.50', 'coolGray.800')}>
+  <Center flex={1} _light={{ bg: 'primary.100' }} _dark={{ bg: 'primary.800' }}>
     <Dashboard />
   </Center>
 )
 
 const App = () => {
   return (
-    <NativeBaseProvider>
+    <NativeBaseProvider theme={theme}>
       <ThemedContent />
     </NativeBaseProvider>
   )
