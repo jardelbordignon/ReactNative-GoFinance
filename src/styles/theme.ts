@@ -13,7 +13,8 @@ export const theme = extendTheme({
       shape: '#FFF',
       title: '#363F5F',
       text: '#969CB2',
-      backgroud: '#F0F2F5',
+      bg_light: '#F0F2F5',
+      bg_dark: '#1c1917',
     },
   },
   config: {

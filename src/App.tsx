@@ -5,7 +5,10 @@ import { Dashboard } from './screens/Dashboard'
 import { theme } from './styles/theme'
 
 const ThemedContent = () => (
-  <Center flex={1} _light={{ bg: 'primary.100' }} _dark={{ bg: 'primary.800' }}>
+  <Center
+    flex={1}
+    _light={{ bg: 'app.bg_light' }}
+    _dark={{ bg: 'app.bg_dark' }}>
     <Dashboard />
   </Center>
 )
