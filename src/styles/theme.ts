@@ -19,4 +19,16 @@ export const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
   },
+  fontConfig: {
+    Poppins: {
+      400: 'Poppins-Regular',
+      500: 'Poppins-Medium',
+      700: 'Poppins-Bold',
+    },
+  },
+  fonts: {
+    heading: 'Poppins',
+    body: 'Poppins',
+    mono: 'Poppins',
+  },
 })

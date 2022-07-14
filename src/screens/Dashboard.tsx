@@ -6,7 +6,7 @@ export const Dashboard = () => {
 
   return (
     <Center>
-      <Text fontSize={24} fontWeight="bold">
+      <Text fontSize={24} fontWeight={700}>
         Dashboard
       </Text>
       <Button onPress={toggleColorMode}>Toggle</Button>
