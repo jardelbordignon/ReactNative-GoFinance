@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Icon } from 'src/styles/commons'
+
 import * as S from './styles'
 
 export const Dashboard = () => {
@@ -16,6 +18,8 @@ export const Dashboard = () => {
               <S.TxtName>Jardel</S.TxtName>
             </S.UserInfo>
           </S.UserBox>
+
+          <Icon name="power" color="secondary" />
         </S.UserWrapper>
       </S.Header>
     </S.Container>

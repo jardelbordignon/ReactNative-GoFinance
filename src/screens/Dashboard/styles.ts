@@ -18,6 +18,9 @@ export const Header = styled.View`
 `
 
 export const UserWrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 0 24px;
 `
