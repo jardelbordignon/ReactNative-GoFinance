@@ -18,3 +18,5 @@ export const theme = {
     bold: 'Poppins-Bold',
   },
 }
+
+export type ThemeType = typeof theme
