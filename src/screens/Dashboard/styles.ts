@@ -46,6 +46,6 @@ export const UserInfo = styled.View`
 //   font-family: ${({ theme }) => theme.fonts.bold};
 // `
 
-export { Txt }
+export const Greeting = styled(Txt).attrs({ color: 'shape' })``
 
-export const TxtName = styled(Txt).attrs({ font: 'bold' })``
+export const UserName = styled(Txt).attrs({ color: 'shape', font: 'bold' })``

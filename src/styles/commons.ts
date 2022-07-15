@@ -25,7 +25,7 @@ type TxtType = {
 export const Txt = styled.Text<TxtType>`
   font-family: ${props => props.theme.fonts[props.font || 'regular']};
   font-size: ${props => RFValue(props.size || 18)}px;
-  color: ${props => props.theme.colors[props.color || 'shape']};
+  color: ${props => props.theme.colors[props.color || 'text']};
 `
 
 type IconType = {
