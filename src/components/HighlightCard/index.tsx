@@ -9,7 +9,7 @@ export function HighlightCard() {
     <S.Wrapper>
       <S.Header>
         <S.Title>Entrada</S.Title>
-        <Icon name="arrow-up-circle" />
+        <Icon name="arrow-up-circle" size={40} color="title" />
       </S.Header>
 
       <S.Content>

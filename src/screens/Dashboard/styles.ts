@@ -49,3 +49,9 @@ export const UserInfo = styled.View`
 export const Greeting = styled(Txt).attrs({ color: 'shape' })``
 
 export const UserName = styled(Txt).attrs({ color: 'shape', font: 'bold' })``
+
+export const HighlightCards = styled.ScrollView.attrs({
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: { paddingHorizontal: 24 },
+})``

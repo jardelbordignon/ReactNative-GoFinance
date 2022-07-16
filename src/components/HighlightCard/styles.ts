@@ -8,14 +8,28 @@ export const Wrapper = styled.View`
   width: ${RFValue(300)}px;
   border-radius: 5px;
   padding: 19px 24px ${RFValue(42)}px;
+  margin-right: 16px;
 `
 
-export const Header = styled.View``
+export const Header = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
 
-export const Title = styled(Txt).attrs({ color: 'title', font: 'medium' })``
+export const Title = styled(Txt).attrs({
+  color: 'title',
+  font: 'medium',
+  size: 14,
+})``
 
 export const Content = styled.View``
 
-export const Amount = styled(Txt)``
+export const Amount = styled(Txt).attrs({
+  color: 'title',
+  font: 'medium',
+  size: 32,
+})`
+  margin-top: 32px;
+`
 
-export const Message = styled(Txt)``
+export const Message = styled(Txt).attrs({ size: 12 })``
