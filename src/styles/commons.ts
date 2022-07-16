@@ -36,5 +36,5 @@ type IconType = {
 
 export const Icon = styled(Feather)<IconType>`
   color: ${props => props.theme.colors[props.color || 'shape']};
-  font-size: ${RFValue(24)}px;
+  font-size: ${props => RFValue(props.size || 24)}px;
 `
