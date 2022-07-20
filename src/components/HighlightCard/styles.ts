@@ -3,8 +3,13 @@ import styled from 'styled-components/native'
 
 import { Txt } from 'src/styles/commons'
 
-export const Wrapper = styled.View`
-  background-color: ${({ theme }) => theme.colors.shape};
+export type TypeProps = {
+  type: 'up' | 'down' | 'total'
+}
+
+export const Wrapper = styled.View<TypeProps>`
+  background-color: ${({ theme, type }) =>
+    theme.colors[type === 'total' ? 'secondary' : 'shape']};
   border-radius: 5px;
   padding: 19px 24px ${RFValue(42)}px;
   margin-right: 16px;
@@ -16,10 +21,12 @@ export const Header = styled.View`
 `
 
 export const Title = styled(Txt).attrs({
-  color: 'title',
   font: 'medium',
   size: 14,
-})``
+})<TypeProps>`
+  color: ${({ theme, type }) =>
+    theme.colors[type === 'total' ? 'shape' : 'text_dark']};
+`
 
 export const Content = styled.View``
 
@@ -27,8 +34,13 @@ export const Amount = styled(Txt).attrs({
   color: 'title',
   font: 'medium',
   size: 32,
-})`
+})<TypeProps>`
   margin-top: 32px;
+  color: ${({ theme, type }) =>
+    theme.colors[type === 'total' ? 'shape' : 'text_dark']};
 `
 
-export const Message = styled(Txt).attrs({ size: 12 })``
+export const Message = styled(Txt).attrs({ size: 12 })<TypeProps>`
+  color: ${({ theme, type }) =>
+    theme.colors[type === 'total' ? 'shape' : 'text']};
+`

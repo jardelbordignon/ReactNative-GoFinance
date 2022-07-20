@@ -24,7 +24,7 @@ export const UserWrapper = styled.View`
   align-items: center;
   width: 100%;
   padding: 0 24px;
-  margin-top: ${getStatusBarHeight() + RFValue(28)}px;
+  margin-top: ${getStatusBarHeight() + RFValue(8)}px;
 `
 
 export const UserBox = styled.View`
@@ -61,5 +61,5 @@ export const HighlightCards = styled.ScrollView.attrs({
 })`
   width: 100%;
   position: absolute;
-  margin-top: ${RFPercentage(24)}px;
+  margin-top: ${RFPercentage(20)}px;
 `
