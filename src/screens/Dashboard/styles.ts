@@ -1,3 +1,4 @@
+import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 
@@ -10,7 +11,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row;
   width: 100%;
   height: ${RFPercentage(42)}px;
@@ -23,6 +24,7 @@ export const UserWrapper = styled.View`
   align-items: center;
   width: 100%;
   padding: 0 24px;
+  margin-top: ${getStatusBarHeight() + RFValue(28)}px;
 `
 
 export const UserBox = styled.View`
@@ -53,5 +55,11 @@ export const UserName = styled(Txt).attrs({ color: 'shape', font: 'bold' })``
 export const HighlightCards = styled.ScrollView.attrs({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
-  contentContainerStyle: { paddingHorizontal: 24 },
-})``
+  contentContainerStyle: {
+    paddingHorizontal: 24,
+  },
+})`
+  width: 100%;
+  position: absolute;
+  margin-top: ${RFPercentage(24)}px;
+`

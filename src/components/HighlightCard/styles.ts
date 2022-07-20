@@ -5,7 +5,6 @@ import { Txt } from 'src/styles/commons'
 
 export const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.shape};
-  width: ${RFValue(300)}px;
   border-radius: 5px;
   padding: 19px 24px ${RFValue(42)}px;
   margin-right: 16px;
