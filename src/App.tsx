@@ -1,13 +1,13 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components/native'
 
-import { Register } from './screens/Register'
+import { CategorySelect } from './screens/CategorySelect'
 import { theme } from './styles/theme'
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Register />
+      <CategorySelect />
     </ThemeProvider>
   )
 }
