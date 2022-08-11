@@ -1,13 +1,13 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components/native'
 
-import { Dashboard } from './screens/Dashboard'
+import { Register } from './screens/Register'
 import { theme } from './styles/theme'
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Dashboard />
+      <Register />
     </ThemeProvider>
   )
 }
