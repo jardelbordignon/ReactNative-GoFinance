@@ -9,6 +9,7 @@
     "i": "yarn ios",
     "start": "react-native start",
     "s": "yarn start",
+    "s:rc": "yarn start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
