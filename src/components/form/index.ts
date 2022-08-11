@@ -1,4 +1,4 @@
 export * from './Button'
-export * from './CategorySelect'
+export * from './CategorySelectButton'
 export * from './Input'
 export * from './TransactionTypeButton'

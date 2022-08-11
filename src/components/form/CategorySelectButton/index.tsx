@@ -6,7 +6,7 @@ type Props = {
   title: string
 }
 
-export function CategorySelect({ title }: Props) {
+export function CategorySelectButton({ title }: Props) {
   return (
     <S.Wrapper>
       <S.Title>{title}</S.Title>
