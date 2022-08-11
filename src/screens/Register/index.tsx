@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Input } from 'src/components/form'
+import { Button, Input } from 'src/components/form'
 
 import * as S from './styles'
 
@@ -12,8 +12,11 @@ export function Register() {
       </S.Header>
 
       <S.Form>
-        <Input placeholder="Nome" />
-        <Input placeholder="Preço" />
+        <S.Fields>
+          <Input placeholder="Nome" />
+          <Input placeholder="Preço" />
+        </S.Fields>
+        <Button title="Enviar" />
       </S.Form>
     </S.Wrapper>
   )
