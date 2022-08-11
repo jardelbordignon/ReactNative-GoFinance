@@ -6,7 +6,7 @@ export const theme = {
     success: '#12A454',
     success_light: '#12A45450',
     attention: '#E83F5B',
-    attention_ligth: '#E83F5B50',
+    attention_light: '#E83F5B50',
     shape: '#FFF',
     title: '#363F5F',
     text: '#969CB2',
