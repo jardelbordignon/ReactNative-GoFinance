@@ -2,10 +2,14 @@ import React from 'react'
 
 import * as S from './styles'
 
-export function Base() {
+type Props = {
+  title: string
+}
+
+export function Base({ title }: Props) {
   return (
     <S.Wrapper>
-      <S.Title>Base</S.Title>
+      <S.Title>{title}</S.Title>
     </S.Wrapper>
   )
 }
