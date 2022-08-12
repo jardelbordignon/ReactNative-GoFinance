@@ -24,9 +24,7 @@ export function HighlightCard({ title, amount, message, type }: Props) {
         <Icon
           name={icon[type]}
           size={40}
-          color={
-            type === 'up' ? 'success' : type === 'down' ? 'attention' : 'shape'
-          }
+          color={type === 'up' ? 'success' : type === 'down' ? 'attention' : 'shape'}
         />
       </S.Header>
 

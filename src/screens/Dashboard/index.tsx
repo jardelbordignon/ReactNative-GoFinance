@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useDeferredValue, useState, useTransition } from 'react'
 
 import { HighlightCard } from 'src/components/HighlightCard'
+import { TransactionCard } from 'src/components/TransactionCard'
 import { Icon } from 'src/styles/commons'
 
 import * as S from './styles'
 
+// type DataListProps = TransactionCardProps
+
 export function Dashboard() {
+  // const [cartItems, setCartItems] = useState<CartItemType[]>([])
+  // const countCartItems = useDeferredValue(cartItems.length)
+  // const [isPending, startTransition] = useTransition()
+
+  // useEffect(() => {
+  //   startTransition(() => {
+  //     const items = localStorage.getItem('cartItems')
+  //     if (items) setCartItems(JSON.parse(items))
+  //   })
+  // }, [])
+
   return (
     <S.Container>
       <S.Header>
@@ -44,6 +58,11 @@ export function Dashboard() {
           message="01 à 20 de julho"
         />
       </S.HighlightCards>
+
+      <S.Transactions>
+        <S.Title>Listagem</S.Title>
+        <TransactionCard />
+      </S.Transactions>
     </S.Container>
   )
 }
