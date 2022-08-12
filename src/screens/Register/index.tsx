@@ -29,6 +29,16 @@ const yupSchema = (yup: YupType) =>
 const initialCategory = {
   key: 'category',
   name: 'Selecionar categoria',
+  icon: '',
+}
+
+export type TransactionType = {
+  id: string
+  name: string
+  amount: number
+  transactionType: string
+  category: string
+  createdAt: Date
 }
 
 export function Register() {
@@ -37,7 +47,7 @@ export function Register() {
   const [category, setCategory] = useState<CategoryType>(initialCategory)
   const { navigate } = useNavigation()
 
-  const handleTransactionTypeSelect = (type: 'up' | 'down') => {
+  const handleTransactionTypeSelect = (type: 'incoming' | 'withdrawal') => {
     setTransactionType(type)
   }
 
@@ -69,9 +79,9 @@ export function Register() {
       id: Date.now().toString(),
       name,
       amount,
-      transactionType,
-      category: category.key,
-      createdAt: new Date(),
+      type: transactionType,
+      categoryKey: category.key,
+      date: new Date(),
     }
 
     try {
@@ -117,15 +127,15 @@ export function Register() {
             <S.TransactionButtons>
               <TransactionTypeButton
                 title="Entrada"
-                type="up"
-                onPress={() => handleTransactionTypeSelect('up')}
-                isActive={transactionType === 'up'}
+                type="incoming"
+                onPress={() => handleTransactionTypeSelect('incoming')}
+                isActive={transactionType === 'incoming'}
               />
               <TransactionTypeButton
                 title="Saída"
-                type="down"
-                onPress={() => handleTransactionTypeSelect('down')}
-                isActive={transactionType === 'down'}
+                type="withdrawal"
+                onPress={() => handleTransactionTypeSelect('withdrawal')}
+                isActive={transactionType === 'withdrawal'}
               />
             </S.TransactionButtons>
             <CategorySelectButton

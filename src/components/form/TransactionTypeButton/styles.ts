@@ -8,7 +8,7 @@ export type WrapperProps = IconProps & {
 }
 
 type IconProps = {
-  type: 'up' | 'down'
+  type: 'incoming' | 'withdrawal'
 }
 
 export const Wrapper = styled.View<WrapperProps>`
@@ -22,7 +22,7 @@ export const Wrapper = styled.View<WrapperProps>`
     isActive &&
     css`
       background-color: ${theme.colors[
-        type === 'up' ? 'success_light' : 'attention_light'
+        type === 'incoming' ? 'success_light' : 'attention_light'
       ]};
       border: none;
     `}
@@ -38,7 +38,8 @@ export const Button = styled(RectButton)`
 export const Icon = styled(Feather)<IconProps>`
   font-size: ${RFValue(24)}px;
   margin-right: 12px;
-  color: ${({ theme, type }) => theme.colors[type === 'up' ? 'success' : 'attention']};
+  color: ${({ theme, type }) =>
+    theme.colors[type === 'incoming' ? 'success' : 'attention']};
 `
 
 export const Title = styled.Text`

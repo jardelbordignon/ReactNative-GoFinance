@@ -9,8 +9,8 @@ type Props = RectButtonProps &
   }
 
 const icons = {
-  up: 'arrow-up-circle',
-  down: 'arrow-down-circle',
+  incoming: 'arrow-up-circle',
+  withdrawal: 'arrow-down-circle',
 }
 
 export function TransactionTypeButton({ title, type, isActive, ...rest }: Props) {

@@ -1,8 +1,11 @@
-import React from 'react'
+import { useFocusEffect } from '@react-navigation/native'
+import React, { useCallback, useState, useTransition } from 'react'
 
 import { HighlightCard } from 'src/components/HighlightCard'
 import { TransactionCard, TransactionCardProps } from 'src/components/TransactionCard'
+import { storage } from 'src/provider'
 import { Icon } from 'src/styles/commons'
+import { delay } from 'src/utils/helpers'
 
 import * as S from './styles'
 
@@ -11,52 +14,55 @@ export type DataListProps = TransactionCardProps & {
 }
 
 export function Dashboard() {
-  // const [cartItems, setCartItems] = useState<CartItemType[]>([])
-  // const countCartItems = useDeferredValue(cartItems.length)
-  // const [isPending, startTransition] = useTransition()
+  const [data, setData] = useState<DataListProps[]>([])
+  const [isPending, startTransition] = useTransition()
+
+  const loadTransactions = async () => {
+    await delay(1)
+    //await storage.clear('transactions')
+    const transactions = await storage.get<DataListProps[]>('transactions')
+    if (!transactions) return
+
+    console.log(transactions)
+    const formattedTransactions = transactions.map(item => {
+      const amount = Number(item.amount).toLocaleString('pr-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      })
+
+      const date = Intl.DateTimeFormat('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: '2-digit',
+      }).format(new Date(item.date))
+
+      return { ...item, amount, date }
+    })
+
+    setData(formattedTransactions)
+  }
 
   // useEffect(() => {
   //   startTransition(() => {
-  //     const items = localStorage.getItem('cartItems')
-  //     if (items) setCartItems(JSON.parse(items))
+  //     loadTransactions()
   //   })
   // }, [])
 
-  const data: DataListProps[] = [
-    {
-      id: '1',
-      type: 'incoming',
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
-      category: {
-        icon: 'dollar-sign',
-        name: 'Vendas',
-      },
-      date: '12/08/2022',
-    },
-    {
-      id: '2',
-      type: 'withdrawal',
-      title: 'Pizzaria',
-      amount: 'R$ 59,00',
-      category: {
-        icon: 'coffee',
-        name: 'Alimentação',
-      },
-      date: '12/08/2022',
-    },
-    {
-      id: '3',
-      type: 'withdrawal',
-      title: 'Aluguel do apartamento',
-      amount: 'R$ 1.200,00',
-      category: {
-        icon: 'shopping-bag',
-        name: 'Casa',
-      },
-      date: '12/08/2022',
-    },
-  ]
+  useFocusEffect(
+    useCallback(() => {
+      startTransition(() => {
+        loadTransactions()
+      })
+    }, [])
+  )
+
+  if (isPending) {
+    return (
+      <S.Container>
+        <S.Title>Carregando...</S.Title>
+      </S.Container>
+    )
+  }
 
   return (
     <S.Container>

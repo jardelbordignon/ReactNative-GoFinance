@@ -1,17 +1,15 @@
 import React from 'react'
 
-import { CategoryType } from 'src/screens/CategorySelect'
 import { Icon } from 'src/styles/commons'
+import { categories } from 'src/utils/categories'
 
 import * as S from './styles'
 
-type CategoryWithoutKey = Omit<CategoryType, 'key'>
-
 export type TransactionCardProps = {
   type: 'incoming' | 'withdrawal'
-  title: string
+  name: string
   amount: string
-  category: CategoryWithoutKey
+  categoryKey: string
   date: string
 }
 
@@ -20,11 +18,13 @@ type Props = {
 }
 
 export function TransactionCard({ data }: Props) {
-  const { title, amount, category, date, type } = data
+  const { name, amount, categoryKey, date, type } = data
+  const category = categories.find(item => item.key === categoryKey)
+  if (!category) return
 
   return (
     <S.Wrapper>
-      <S.Title>{title}</S.Title>
+      <S.Title>{name}</S.Title>
       <S.Amount type={type}>
         {type === 'withdrawal' && '- '}
         {amount}
