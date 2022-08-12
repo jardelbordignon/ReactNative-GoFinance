@@ -2,9 +2,9 @@ export const theme = {
   colors: {
     primary: '#5636D3',
     secondary: '#FF872C',
-    secondary_light: '#FF872C30',
+    secondary_light: '#FF872C70',
     success: '#12A454',
-    success_light: '#12A45450',
+    success_light: '#12A45470',
     attention: '#E83F5B',
     attention_light: '#E83F5B50',
     shape: '#FFF',

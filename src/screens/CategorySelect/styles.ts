@@ -2,6 +2,10 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import Feather from 'react-native-vector-icons/Feather'
 import styled from 'styled-components/native'
 
+type CategoryItemProps = {
+  isActive: boolean
+}
+
 export const Wrapper = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.colors.background};
@@ -17,12 +21,15 @@ export const Header = styled.View`
   padding-bottom: 18px;
 `
 
-export const CategoryItem = styled.View`
+export const CategoryItem = styled.TouchableOpacity<CategoryItemProps>`
   width: 100%;
   padding: ${RFValue(16)}px;
 
   flex-direction: row;
   align-items: center;
+
+  background-color: ${({ theme, isActive }) =>
+    theme.colors[isActive ? 'secondary_light' : 'background']};
 `
 
 export const Icon = styled(Feather)`
