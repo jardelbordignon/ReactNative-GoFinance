@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { Modal } from 'react-native'
+import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from 'react-native'
 
 import { CategorySelect, CategoryType } from '../CategorySelect'
 
 import {
   Button,
   CategorySelectButton,
-  Input,
+  InputForm,
   TransactionTypeButton,
 } from 'src/components/form'
+import useForm, { YupType } from 'src/hooks/useForm'
 
 import * as S from './styles'
+
+type FormData = {
+  name: string
+  amount: number
+}
+
+const yupSchema = (yup: YupType) =>
+  yup.object().shape({
+    name: yup.string().required(),
+    amount: yup.number().positive().required(),
+  })
 
 export function Register() {
   const [transactionType, setTransactionType] = useState('')
   const [CategoryModalOpen, setCategoryModalOpen] = useState(false)
   const [category, setCategory] = useState<CategoryType>({
     key: 'category',
-    name: 'Categoria',
+    name: 'Selecionar categoria',
   })
 
   const handleTransactionTypeSelect = (type: 'up' | 'down') => {
@@ -28,46 +40,79 @@ export function Register() {
     setCategoryModalOpen(false)
   }, [category])
 
+  const { register, handleSubmit, isSubmitting } = useForm<FormData>({ yupSchema })
+
+  const onSubmit = handleSubmit(async ({ name, amount }: FormData) => {
+    if (!transactionType) {
+      return Alert.alert('Selecione o tipo de transação')
+    }
+
+    if (category.key === 'category') {
+      return Alert.alert('Selecione a categoria')
+    }
+
+    const data = {
+      name,
+      amount,
+      transactionType,
+      category: category.key,
+    }
+    console.log(data)
+  })
+
   return (
-    <S.Wrapper>
-      <S.Header>
-        <S.Title>Cadastro</S.Title>
-      </S.Header>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <S.Wrapper>
+        <S.Header>
+          <S.Title>Cadastro</S.Title>
+        </S.Header>
 
-      <S.Form>
-        <S.Fields>
-          <Input placeholder="Nome" />
-          <Input placeholder="Preço" />
-          <S.TransactionButtons>
-            <TransactionTypeButton
-              title="Entrada"
-              type="up"
-              onPress={() => handleTransactionTypeSelect('up')}
-              isActive={transactionType === 'up'}
+        <S.Form>
+          <S.Fields>
+            <InputForm
+              {...register('name')}
+              placeholder="Nome"
+              autoCapitalize="sentences"
+              autoCorrect={false}
             />
-            <TransactionTypeButton
-              title="Saída"
-              type="down"
-              onPress={() => handleTransactionTypeSelect('down')}
-              isActive={transactionType === 'down'}
+
+            <InputForm
+              {...register('amount')}
+              placeholder="Preço"
+              keyboardType="numeric"
             />
-          </S.TransactionButtons>
-          <CategorySelectButton
-            title={category.name}
-            onPress={() => setCategoryModalOpen(true)}
+
+            <S.TransactionButtons>
+              <TransactionTypeButton
+                title="Entrada"
+                type="up"
+                onPress={() => handleTransactionTypeSelect('up')}
+                isActive={transactionType === 'up'}
+              />
+              <TransactionTypeButton
+                title="Saída"
+                type="down"
+                onPress={() => handleTransactionTypeSelect('down')}
+                isActive={transactionType === 'down'}
+              />
+            </S.TransactionButtons>
+            <CategorySelectButton
+              title={category.name}
+              onPress={() => setCategoryModalOpen(true)}
+            />
+          </S.Fields>
+          <Button title="Enviar" onPress={onSubmit} disabled={isSubmitting} />
+        </S.Form>
+
+        <Modal visible={CategoryModalOpen} animationType="slide">
+          <CategorySelect
+            category={category}
+            setCategory={setCategory}
+            //setCategory={setCategory}
+            //closeModal={() => handleSetCategoryModalOpen(false)}
           />
-        </S.Fields>
-        <Button title="Enviar" />
-      </S.Form>
-
-      <Modal visible={CategoryModalOpen}>
-        <CategorySelect
-          category={category}
-          setCategory={setCategory}
-          //setCategory={setCategory}
-          //closeModal={() => handleSetCategoryModalOpen(false)}
-        />
-      </Modal>
-    </S.Wrapper>
+        </Modal>
+      </S.Wrapper>
+    </TouchableWithoutFeedback>
   )
 }
