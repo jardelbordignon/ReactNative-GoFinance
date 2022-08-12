@@ -1,13 +1,14 @@
-import React, { useDeferredValue, useState, useTransition } from 'react'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import React from 'react'
 
 import { HighlightCard } from 'src/components/HighlightCard'
-import { TransactionCard } from 'src/components/TransactionCard'
+import { TransactionCard, TransactionCardProps } from 'src/components/TransactionCard'
 import { Icon } from 'src/styles/commons'
 
 import * as S from './styles'
 
-// type DataListProps = TransactionCardProps
+export type DataListProps = TransactionCardProps & {
+  id: string
+}
 
 export function Dashboard() {
   // const [cartItems, setCartItems] = useState<CartItemType[]>([])
@@ -21,8 +22,9 @@ export function Dashboard() {
   //   })
   // }, [])
 
-  const data = [
+  const data: DataListProps[] = [
     {
+      id: '1',
       type: 'incoming',
       title: 'Desenvolvimento de site',
       amount: 'R$ 12.000,00',
@@ -33,6 +35,7 @@ export function Dashboard() {
       date: '12/08/2022',
     },
     {
+      id: '2',
       type: 'withdrawal',
       title: 'Pizzaria',
       amount: 'R$ 59,00',
@@ -43,6 +46,7 @@ export function Dashboard() {
       date: '12/08/2022',
     },
     {
+      id: '3',
       type: 'withdrawal',
       title: 'Aluguel do apartamento',
       amount: 'R$ 1.200,00',
@@ -97,11 +101,8 @@ export function Dashboard() {
         <S.Title>Listagem</S.Title>
         <S.TransactionList
           data={data}
+          keyExtractor={item => item.id}
           renderItem={({ item }) => <TransactionCard data={item} />}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingBottom: getBottomSpace(),
-          }}
         />
       </S.Transactions>
     </S.Container>

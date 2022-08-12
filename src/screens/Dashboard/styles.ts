@@ -1,9 +1,12 @@
+import { FlatList, FlatListProps } from 'react-native'
 import { BorderlessButton } from 'react-native-gesture-handler'
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 
 import { Txt } from 'src/styles/commons'
+
+import { DataListProps } from '.'
 
 export const Container = styled.View`
   flex: 1;
@@ -79,4 +82,11 @@ export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
 `
 
-export const TransactionList = styled.FlatList``
+export const TransactionList = styled(
+  FlatList as new (props: FlatListProps<DataListProps>) => FlatList<DataListProps>
+).attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: getBottomSpace(),
+  },
+})``

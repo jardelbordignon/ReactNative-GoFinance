@@ -7,7 +7,7 @@ import * as S from './styles'
 
 type CategoryWithoutKey = Omit<CategoryType, 'key'>
 
-type DataType = {
+export type TransactionCardProps = {
   type: 'incoming' | 'withdrawal'
   title: string
   amount: string
@@ -16,7 +16,7 @@ type DataType = {
 }
 
 type Props = {
-  data: DataType
+  data: TransactionCardProps
 }
 
 export function TransactionCard({ data }: Props) {
