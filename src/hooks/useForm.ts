@@ -17,7 +17,7 @@ const useForm = <T extends { [key: string]: any }>({
 }: UseFormType) => {
   const resolver = yupResolver(yupSchema(yup))
 
-  const { control, handleSubmit, formState, getValues, watch } = _useForm({
+  const { control, handleSubmit, formState, getValues, watch, reset } = _useForm({
     mode,
     resolver,
     defaultValues,
@@ -30,7 +30,7 @@ const useForm = <T extends { [key: string]: any }>({
     error: errors[String(name)]?.message,
   })
 
-  return { register, isSubmitting, handleSubmit, getValues, watch }
+  return { register, isSubmitting, handleSubmit, getValues, watch, reset }
 }
 
 export default useForm

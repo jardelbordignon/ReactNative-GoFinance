@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from 'react-native'
 
@@ -25,13 +26,16 @@ const yupSchema = (yup: YupType) =>
     amount: yup.number().positive().required(),
   })
 
+const initialCategory = {
+  key: 'category',
+  name: 'Selecionar categoria',
+}
+
 export function Register() {
   const [transactionType, setTransactionType] = useState('')
   const [CategoryModalOpen, setCategoryModalOpen] = useState(false)
-  const [category, setCategory] = useState<CategoryType>({
-    key: 'category',
-    name: 'Selecionar categoria',
-  })
+  const [category, setCategory] = useState<CategoryType>(initialCategory)
+  const { navigate } = useNavigation()
 
   const handleTransactionTypeSelect = (type: 'up' | 'down') => {
     setTransactionType(type)
@@ -50,7 +54,7 @@ export function Register() {
     loadData()
   }, [])
 
-  const { register, handleSubmit, isSubmitting } = useForm<FormData>({ yupSchema })
+  const { register, handleSubmit, isSubmitting, reset } = useForm<FormData>({ yupSchema })
 
   const onSubmit = handleSubmit(async ({ name, amount }: FormData) => {
     if (!transactionType) {
@@ -61,15 +65,27 @@ export function Register() {
       return Alert.alert('Selecione a categoria')
     }
 
-    const data = {
+    const newTransaction = {
+      id: Date.now().toString(),
       name,
       amount,
       transactionType,
       category: category.key,
+      createdAt: new Date(),
     }
 
     try {
-      await storage.set('transactions', data)
+      const currentTransactions = await storage.get('transactions')
+      const transactions = currentTransactions
+        ? [...currentTransactions, newTransaction]
+        : [newTransaction]
+
+      await storage.set('transactions', transactions)
+
+      reset()
+      setTransactionType('')
+      setCategory(initialCategory)
+      navigate('Listagem' as never)
     } catch (error) {
       console.log(error)
       Alert.alert('Não foi possível salvar')
