@@ -9,6 +9,7 @@ import * as S from './styles'
 export type CategoryType = {
   key: string
   name: string
+  icon: string
 }
 
 type Props = {

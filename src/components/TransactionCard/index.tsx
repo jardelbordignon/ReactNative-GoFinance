@@ -1,20 +1,36 @@
 import React from 'react'
 
+import { CategoryType } from 'src/screens/CategorySelect'
 import { Icon } from 'src/styles/commons'
 
 import * as S from './styles'
 
-export function TransactionCard() {
+type CategoryWithoutKey = Omit<CategoryType, 'key'>
+
+type DataType = {
+  title: string
+  amount: string
+  category: CategoryWithoutKey
+  date: string
+}
+
+type Props = {
+  data: DataType
+}
+
+export function TransactionCard({ data }: Props) {
+  const { title, amount, category, date } = data
+
   return (
     <S.Wrapper>
-      <S.Title>Desenvolvimento de site</S.Title>
-      <S.Amount>R$ 12.000,00</S.Amount>
+      <S.Title>{title}</S.Title>
+      <S.Amount>{amount}</S.Amount>
       <S.Footer>
         <S.Category>
           <Icon name="dollar-sign" size={20} color="text" />
-          <S.FooterText>Vendas</S.FooterText>
+          <S.FooterText>{category.name}</S.FooterText>
         </S.Category>
-        <S.FooterText>12/08/2022</S.FooterText>
+        <S.FooterText>{date}</S.FooterText>
       </S.Footer>
     </S.Wrapper>
   )

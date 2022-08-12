@@ -1,4 +1,5 @@
 import React, { useDeferredValue, useState, useTransition } from 'react'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 import { HighlightCard } from 'src/components/HighlightCard'
 import { TransactionCard } from 'src/components/TransactionCard'
@@ -19,6 +20,36 @@ export function Dashboard() {
   //     if (items) setCartItems(JSON.parse(items))
   //   })
   // }, [])
+
+  const data = [
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        icon: 'dollar-sign',
+        name: 'Vendas',
+      },
+      date: '12/08/2022',
+    },
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        icon: 'dollar-sign',
+        name: 'Vendas',
+      },
+      date: '12/08/2022',
+    },
+    {
+      title: 'Desenvolvimento de site',
+      amount: 'R$ 12.000,00',
+      category: {
+        icon: 'dollar-sign',
+        name: 'Vendas',
+      },
+      date: '12/08/2022',
+    },
+  ]
 
   return (
     <S.Container>
@@ -61,7 +92,14 @@ export function Dashboard() {
 
       <S.Transactions>
         <S.Title>Listagem</S.Title>
-        <TransactionCard />
+        <S.TransactionList
+          data={data}
+          renderItem={({ item }) => <TransactionCard data={item} />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: getBottomSpace(),
+          }}
+        />
       </S.Transactions>
     </S.Container>
   )
