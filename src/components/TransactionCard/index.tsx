@@ -8,6 +8,7 @@ import * as S from './styles'
 type CategoryWithoutKey = Omit<CategoryType, 'key'>
 
 type DataType = {
+  type: 'incoming' | 'withdrawal'
   title: string
   amount: string
   category: CategoryWithoutKey
@@ -19,15 +20,18 @@ type Props = {
 }
 
 export function TransactionCard({ data }: Props) {
-  const { title, amount, category, date } = data
+  const { title, amount, category, date, type } = data
 
   return (
     <S.Wrapper>
       <S.Title>{title}</S.Title>
-      <S.Amount>{amount}</S.Amount>
+      <S.Amount type={type}>
+        {type === 'withdrawal' && '- '}
+        {amount}
+      </S.Amount>
       <S.Footer>
         <S.Category>
-          <Icon name="dollar-sign" size={20} color="text" />
+          <Icon name={category.icon} size={20} color="text" />
           <S.FooterText>{category.name}</S.FooterText>
         </S.Category>
         <S.FooterText>{date}</S.FooterText>

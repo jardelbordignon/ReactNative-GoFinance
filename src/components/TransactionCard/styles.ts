@@ -1,6 +1,10 @@
 import { RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
 
+type TransactionCardStyleProps = {
+  type: 'incoming' | 'withdrawal'
+}
+
 export const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.shape};
   border-radius: 5px;
@@ -14,9 +18,11 @@ export const Title = styled.Text`
   margin-bottom: 16px;
 `
 
-export const Amount = styled.Text`
+export const Amount = styled.Text<TransactionCardStyleProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: ${RFValue(20)}px;
+  color: ${({ theme, type }) =>
+    theme.colors[type === 'incoming' ? 'success' : 'attention']};
 `
 
 export const Footer = styled.View`

@@ -23,6 +23,7 @@ export function Dashboard() {
 
   const data = [
     {
+      type: 'incoming',
       title: 'Desenvolvimento de site',
       amount: 'R$ 12.000,00',
       category: {
@@ -32,20 +33,22 @@ export function Dashboard() {
       date: '12/08/2022',
     },
     {
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
+      type: 'withdrawal',
+      title: 'Pizzaria',
+      amount: 'R$ 59,00',
       category: {
-        icon: 'dollar-sign',
-        name: 'Vendas',
+        icon: 'coffee',
+        name: 'Alimentação',
       },
       date: '12/08/2022',
     },
     {
-      title: 'Desenvolvimento de site',
-      amount: 'R$ 12.000,00',
+      type: 'withdrawal',
+      title: 'Aluguel do apartamento',
+      amount: 'R$ 1.200,00',
       category: {
-        icon: 'dollar-sign',
-        name: 'Vendas',
+        icon: 'shopping-bag',
+        name: 'Casa',
       },
       date: '12/08/2022',
     },
