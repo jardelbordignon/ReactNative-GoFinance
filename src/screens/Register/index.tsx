@@ -10,6 +10,7 @@ import {
   TransactionTypeButton,
 } from 'src/components/form'
 import useForm, { YupType } from 'src/hooks/useForm'
+import { storage } from 'src/provider'
 
 import * as S from './styles'
 
@@ -40,6 +41,15 @@ export function Register() {
     setCategoryModalOpen(false)
   }, [category])
 
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await storage.get('transactions')
+      console.log(data)
+    }
+
+    loadData()
+  }, [])
+
   const { register, handleSubmit, isSubmitting } = useForm<FormData>({ yupSchema })
 
   const onSubmit = handleSubmit(async ({ name, amount }: FormData) => {
@@ -57,7 +67,13 @@ export function Register() {
       transactionType,
       category: category.key,
     }
-    console.log(data)
+
+    try {
+      await storage.set('transactions', data)
+    } catch (error) {
+      console.log(error)
+      Alert.alert('Não foi possível salvar')
+    }
   })
 
   return (
