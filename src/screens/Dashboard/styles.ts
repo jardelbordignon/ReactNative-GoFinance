@@ -1,3 +1,4 @@
+import { BorderlessButton } from 'react-native-gesture-handler'
 import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize'
 import styled from 'styled-components/native'
@@ -51,6 +52,8 @@ export const UserInfo = styled.View`
 export const Greeting = styled(Txt).attrs({ color: 'shape' })``
 
 export const UserName = styled(Txt).attrs({ color: 'shape', font: 'bold' })``
+
+export const LogoutButton = styled(BorderlessButton)``
 
 export const HighlightCards = styled.ScrollView.attrs({
   horizontal: true,

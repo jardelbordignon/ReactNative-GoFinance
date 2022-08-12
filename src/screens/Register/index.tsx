@@ -101,7 +101,7 @@ export function Register() {
               onPress={() => setCategoryModalOpen(true)}
             />
           </S.Fields>
-          <Button title="Enviar" onPress={onSubmit} disabled={isSubmitting} />
+          <Button title="Enviar" onPress={onSubmit} enabled={!isSubmitting} />
         </S.Form>
 
         <Modal visible={CategoryModalOpen} animationType="slide">

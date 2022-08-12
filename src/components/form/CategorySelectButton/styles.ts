@@ -1,8 +1,9 @@
+import { RectButton } from 'react-native-gesture-handler'
 import { RFValue } from 'react-native-responsive-fontsize'
 import Feather from 'react-native-vector-icons/Feather'
 import styled from 'styled-components/native'
 
-export const Wrapper = styled.TouchableOpacity.attrs({
+export const Wrapper = styled(RectButton).attrs({
   activeOpacity: 0.7,
 })`
   background-color: ${({ theme }) => theme.colors.shape};
