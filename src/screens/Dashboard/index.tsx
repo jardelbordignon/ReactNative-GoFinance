@@ -5,6 +5,7 @@ import { HighlightCard } from 'src/components/HighlightCard'
 import { TransactionCard, TransactionCardProps } from 'src/components/TransactionCard'
 import { storage } from 'src/provider'
 import { Icon } from 'src/styles/commons'
+import { formatDate, formatPrice } from 'src/utils/formatters'
 import { delay } from 'src/utils/helpers'
 
 import * as S from './styles'
@@ -14,39 +15,39 @@ export type DataListProps = TransactionCardProps & {
 }
 
 export function Dashboard() {
-  const [data, setData] = useState<DataListProps[]>([])
+  const [transactions, setTransactions] = useState<DataListProps[]>([])
   const [isPending, startTransition] = useTransition()
+  const [balanceData, setBalanceData] = useState({
+    incoming: '',
+    withdrawal: '',
+    total: '',
+  })
 
   const loadTransactions = async () => {
+    let balance = { incoming: 0, withdrawal: 0, total: 0 }
     await delay(1)
     //await storage.clear('transactions')
-    const transactions = await storage.get<DataListProps[]>('transactions')
-    if (!transactions) return
+    const data = await storage.get<DataListProps[]>('transactions')
+    if (!data) return
 
-    console.log(transactions)
-    const formattedTransactions = transactions.map(item => {
-      const amount = Number(item.amount).toLocaleString('pr-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      })
+    const formattedData = data.map(item => {
+      balance[item.type] += +item.amount
 
-      const date = Intl.DateTimeFormat('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: '2-digit',
-      }).format(new Date(item.date))
+      const amount = formatPrice(+item.amount)
+      const date = formatDate(item.date)
 
       return { ...item, amount, date }
     })
 
-    setData(formattedTransactions)
-  }
+    balance.total = balance.incoming - balance.withdrawal
 
-  // useEffect(() => {
-  //   startTransition(() => {
-  //     loadTransactions()
-  //   })
-  // }, [])
+    setBalanceData({
+      incoming: formatPrice(balance.incoming),
+      withdrawal: formatPrice(balance.withdrawal),
+      total: formatPrice(balance.total),
+    })
+    setTransactions(formattedData)
+  }
 
   useFocusEffect(
     useCallback(() => {
@@ -86,19 +87,19 @@ export function Dashboard() {
         <HighlightCard
           type="up"
           title="Entradas"
-          amount="R$ 17.200,50"
+          amount={balanceData.incoming}
           message="Última entrada em 20 de julho"
         />
         <HighlightCard
           type="down"
           title="Saídas"
-          amount="R$ 10.000,00"
+          amount={balanceData.withdrawal}
           message="Última retirada em 18 de julho"
         />
         <HighlightCard
           type="total"
           title="Total"
-          amount="R$ 7.200,50"
+          amount={balanceData.total}
           message="01 à 20 de julho"
         />
       </S.HighlightCards>
@@ -106,7 +107,7 @@ export function Dashboard() {
       <S.Transactions>
         <S.Title>Listagem</S.Title>
         <S.TransactionList
-          data={data}
+          data={transactions}
           keyExtractor={item => item.id}
           renderItem={({ item }) => <TransactionCard data={item} />}
         />
